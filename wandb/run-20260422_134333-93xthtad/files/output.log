@@ -1,0 +1,7 @@
+Los datos ya existen localmente.
+Balanceando clases a 20000 muestras...
+Traceback (most recent call last):
+  File "/content/drive/MyDrive/Proyecto_MLOps_ECG/src/train.py", line 40, in train_inception
+    cbs=wandb.WandbCallback(log_model=True))
+        ^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'wandb' has no attribute 'WandbCallback'
