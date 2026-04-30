@@ -21,6 +21,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY ./src ./src
 COPY ./api ./api
 
+# Ejecutar tests durante el build
+RUN pytest
+
 # Exponemos el puerto 8000
 EXPOSE 8000
 
