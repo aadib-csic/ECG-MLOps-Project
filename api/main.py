@@ -6,7 +6,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List
 
-# Importamos tu arquitectura y preprocesamiento de la carpeta src
+# Importar arquitectura y preprocesamiento de la carpeta src
 from src.model import InceptionTime
 from src.utils import preprocess_signal
 
@@ -37,12 +37,12 @@ def load_candidate_model():
         artifact = run.use_artifact(MODEL_ARTIFACT, type='model')
         artifact_dir = artifact.download()
         
-        # 1. Instanciar la arquitectura (nf=64 según tu default_config en train.py)
-        # Nota: Si el nf cambió en el sweep, se podría leer de artifact.metadata
+        # 1. Instanciar la arquitectura (nf=64 según default_config en train.py)
+        
         model_engine = InceptionTime(n_classes=5, nf=64)
         
         # 2. Cargar los pesos (el archivo suele llamarse best_model.pth o model.pth)
-        # Buscamos el archivo .pth en el directorio descargado
+        # Buscar el archivo .pth en el directorio descargado
         path_weights = next(iter([f for f in os.listdir(artifact_dir) if f.endswith('.pth')]), None)
         
         if path_weights:
@@ -67,8 +67,7 @@ async def predict(request: ECGRequest):
         raise HTTPException(status_code=503, detail="Modelo no disponible")
 
     try:
-        # 1. Convertir entrada a DataFrame temporal para reusar tu preprocess_signal
-        # Tu función espera un DF con la etiqueta al final, añadimos un 0 ficticio
+        
         import pandas as pd
         temp_df = pd.DataFrame([request.signal + [0]])
         
@@ -79,7 +78,7 @@ async def predict(request: ECGRequest):
         # 3. Inferencia
         with torch.no_grad():
             output = model_engine(input_tensor)
-            # InceptionTime devuelve (fc_output, ), tomamos el primer elemento
+            # InceptionTime devuelve (fc_output, ), toma el primer elemento
             logits = output if isinstance(output, torch.Tensor) else output[0]
             
             prob = torch.softmax(logits, dim=1)

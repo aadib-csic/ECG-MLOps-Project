@@ -1,27 +1,20 @@
-
-# Git
-.git
-.gitignore
-
-# Python temporales
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-.pytest_cache/
-.venv
 venv/
-env/
 
-# Datos y Modelos locales (ya se bajan de W&B o Kaggle en el contenedor)
-data/
-models/*.pth
-artifacts/
-
-# Google Drive / Colab (específico de la estructura actual)
-.ipynb_checkpoints/
-*.ipynb
-
-# Variables de entorno y secretos
-.env
-.wandb
+# MLOps & Tracking
 wandb/
+artifacts/
+.env
+
+# Data & Models
+# Ignoramos todo el contenido de data y models, excepto los punteros DVC
+data/*
+!data/*.dvc
+models/*
+!models/.gitkeep
+
+# OS
+.DS_Store
