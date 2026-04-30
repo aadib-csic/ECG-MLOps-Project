@@ -20,6 +20,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiamos el código respetando tu estructura de Drive
 COPY ./src ./src
 COPY ./api ./api
+COPY ./tests ./tests
 
 # Ejecutar tests durante el build
 RUN pytest
