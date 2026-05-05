@@ -12,8 +12,8 @@ El flujo de trabajo sigue los principios de entrega continua para Machine Learni
 
 ## 📂 Gestión de Datos y Modelos (Versioning)
 Para cumplir con los estándares de reproducibilidad, se han seguido dos estrategias:
-1.  **Versionado de Modelos:** Uso nativo de **WandB** para el ciclo de vida del modelo.
-2.  **Versionado de Datos (DVC):** El repositorio está preparado con **DVC (Data Version Control)** para el seguimiento de los datasets. Los datos pesados se mantienen fuera de la imagen de Docker para optimizar el despliegue, vinculando la trazabilidad al entorno de entrenamiento.
+1.  **Versionado de Modelos:** Uso  de **WandB** para el ciclo de vida del modelo.
+2.  **Versionado de Datos (DVC):** El repositorio está preparado con **DVC (Data Version Control)** para el seguimiento de los datasets. Los datos pesados se mantienen fuera de la imagen de Docker (se quedan en el entorno de entrenamiento y experimentacion) para optimizar el despliegue, vinculando la trazabilidad al entorno de entrenamiento.
 
 ##  Validación y Calidad (CI/CD)
 Se ha implementado un "Quality Gate" en el proceso de construcción de Docker:
