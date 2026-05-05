@@ -38,7 +38,7 @@ def load_candidate_model():
         os.environ["WANDB_SILENT"] = "true"
         
         # 1. Autenticación explícita para entornos en la nube (Render)
-        api_key = os.getenv("WANDB_API_KEY")
+        api_key = os.environ.get("WANDB_API_KEY") or os.getenv("WANDB_API_KEY")
         if api_key:
             wandb.login(key=api_key)
             print("✅ Autenticación W&B exitosa")
