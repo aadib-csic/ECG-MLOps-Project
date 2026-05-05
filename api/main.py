@@ -56,7 +56,7 @@ def load_candidate_model():
         print(f"✅ Artefacto descargado en: {artifact_dir}")
         
         # 2. Instanciar la arquitectura
-        model_engine = InceptionTime(n_classes=5, nf=64)
+        model_engine = InceptionTime(n_classes=5, nf=16)
         
         # 3. Buscar y cargar los pesos
         import glob
