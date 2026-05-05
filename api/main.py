@@ -47,6 +47,7 @@ def load_candidate_model():
             return
 
         print(f"Descargando artefacto: {MODEL_ARTIFACT}...")
+        print("DEBUG ENV KEYS:", list(os.environ.keys()))
         
         # Usar API directa en lugar de wandb.init()
         api = wandb.Api()
