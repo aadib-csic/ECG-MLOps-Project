@@ -43,7 +43,7 @@ def load_candidate_model():
         print(f"Descargando artefacto: {MODEL_ARTIFACT}...")
         
         # Inicializar run de inferencia
-        run = wandb.init(project=PROJECT, entity=ENTITY, job_type="inference")
+        run = wandb.init(project=PROJECT, entity=ENTITY, job_type="inference", settings=wandb.Settings(start_method="fork"))
         artifact = run.use_artifact(MODEL_ARTIFACT, type='model')
         artifact_dir = artifact.download()
         
@@ -69,7 +69,7 @@ def load_candidate_model():
         print(f"❌ ERROR CRÍTICO al cargar modelo: {str(e)}")
         model_engine = None
 
-@app.get("/")
+@app.get("/health_check")
 def health_check():
     return {
         "status": "online" if model_engine else "model_error", 
