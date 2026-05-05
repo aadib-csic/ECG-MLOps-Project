@@ -30,43 +30,52 @@ class ECGRequest(BaseModel):
 
 @app.on_event("startup")
 def load_candidate_model():
-    """Descarga el artefacto v2 de W&B y reconstruye el modelo."""
+    """Descarga el artefacto v2 de W&B y reconstruye el modelo usando API directa (sin sockets)."""
     global model_engine
     try:
+        # Configuración para entorno cloud (desactiva comunicación por sockets)
+        os.environ["WANDB_MODE"] = "offline"
+        os.environ["WANDB_SILENT"] = "true"
+        
         # 1. Autenticación explícita para entornos en la nube (Render)
         api_key = os.getenv("WANDB_API_KEY")
         if api_key:
             wandb.login(key=api_key)
+            print("✅ Autenticación W&B exitosa")
         else:
-            print("WANDB_API_KEY no encontrada en variables de entorno")
+            print("❌ WANDB_API_KEY no encontrada en variables de entorno")
+            return
 
         print(f"Descargando artefacto: {MODEL_ARTIFACT}...")
         
-        # Inicializar run de inferencia
-        run = wandb.init(project=PROJECT, entity=ENTITY, job_type="inference", settings=wandb.Settings(start_method="fork"))
-        artifact = run.use_artifact(MODEL_ARTIFACT, type='model')
+        # Usar API directa en lugar de wandb.init()
+        api = wandb.Api()
+        artifact = api.artifact(MODEL_ARTIFACT)
         artifact_dir = artifact.download()
+        print(f"✅ Artefacto descargado en: {artifact_dir}")
         
         # 2. Instanciar la arquitectura
         model_engine = InceptionTime(n_classes=5, nf=64)
         
-        # 3. Cargar los pesos
-        path_weights = next(iter([f for f in os.listdir(artifact_dir) if f.endswith(('.pth', '.pt'))]), None)
+        # 3. Buscar y cargar los pesos
+        import glob
+        weight_files = glob.glob(os.path.join(artifact_dir, "*.pth")) + glob.glob(os.path.join(artifact_dir, "*.pt"))
+        path_weights = weight_files[0] if weight_files else None
         
         if path_weights:
-            full_path = os.path.join(artifact_dir, path_weights)
-            state_dict = torch.load(full_path, map_location='cpu')
+            print(f"Cargando pesos desde: {os.path.basename(path_weights)}")
+            state_dict = torch.load(path_weights, map_location='cpu')
             model_engine.load_state_dict(state_dict)
             model_engine.eval()
-            print(f"✅ Modelo cargado exitosamente desde: {path_weights}")
+            print(f"✅ Modelo cargado exitosamente")
         else:
             raise FileNotFoundError("No se encontró un archivo de pesos (.pth o .pt) en el artefacto.")
-            
-        run.finish()
 
     except Exception as e:
         # Imprimir el error en los Logs de Render
         print(f"❌ ERROR CRÍTICO al cargar modelo: {str(e)}")
+        import traceback
+        traceback.print_exc()
         model_engine = None
 
 @app.get("/health_check")
@@ -87,7 +96,6 @@ async def predict(request: ECGRequest):
 
     try:
         # 1. Preparar datos para el preprocesador
-        
         data_list = request.signal
         if len(data_list) < 187:
             data_list = data_list + [0.0] * (187 - len(data_list))
