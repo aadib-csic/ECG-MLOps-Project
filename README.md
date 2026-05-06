@@ -37,15 +37,13 @@ Este proyecto implementa un ecosistema completo de **MLOps** para la clasificaci
 
 ### Producción
 - **API Swagger UI:** https://ecg-mlops-project.onrender.com/docs  
-- **Health Check:** https://ecg-mlops-project.onrender.com/health_check  
-- **Endpoint de Predicción:** https://ecg-mlops-project.onrender.com/predict
+- **Health Check:** https:https://ecg-mlops-project.onrender.com/docs#/default/health_check_health_check_get  
+- **Endpoint de Predicción:** https://ecg-mlops-project.onrender.com/docs#/default/predict_predict_post
 
 ### 📊 Weights & Biases
 - **Reporte:**  
-  https://wandb.ai/ali-adib-csic/ECG-MLOps-Project/reports/Reporte-de-MLOps-Comparativa-InceptionTime-vs-ROCKET-y-Trazabilidad-de-Artefactos--VmlldzoxNjY4NTMwNA  
-
-- **Model Registry:**  
-  https://wandb.ai/ali-adib-csic/ECG-MLOps-Project/artifacts  
+ https://api.wandb.ai/links/ali-adib-csic/g1gkwyv4 
+ 
 
 ### 💻 Código
 - **GitHub:** https://github.com/aadib-csic/ECG-MLOps-Project
