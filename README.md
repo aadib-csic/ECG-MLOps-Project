@@ -38,7 +38,7 @@ Este proyecto implementa un ecosistema completo de **MLOps** para la clasificaci
 ### Producción
 - **API Swagger UI:** https://ecg-mlops-project.onrender.com/docs  
 - **Health Check:** https://ecg-mlops-project.onrender.com/health_check  
-- **Endpoint de Predicción:** `POST https://ecg-mlops-project.onrender.com/predict`
+- **Endpoint de Predicción:** https://ecg-mlops-project.onrender.com/predict
 
 ### 📊 Weights & Biases
 - **Reporte:**  
