@@ -1,51 +1,62 @@
 # ECG MLOps Service: Clasificación de Arritmias con InceptionTime
+
 **Autor:** Ali Adib
 
-Este proyecto despliega un ecosistema de **MLOps** para la clasificación de señales de electrocardiograma (ECG) en tiempo real. 
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://render.com/)
+[![Weights & Biases](https://img.shields.io/badge/Weights_&_Biases-FFCC00?style=for-the-badge&logo=weightsandbiases&logoColor=black)](https://wandb.ai/)
+
+---
+
+## 📋 Estado del Proyecto
+
+| Estado | Descripción |
+|--------|-------------|
+| ✅ **API Desplegada** | Servicio activo en Render |
+| 🚀 **Listo para Producción** | Endpoint funcional para usuarios |
+
+---
 
 ## Arquitectura y Metodología
-El flujo de trabajo sigue los estándares de la industria para garantizar la portabilidad y escalabilidad del modelo:
 
-*   **Entrenamiento:** Basado en la arquitectura InceptionTime, con seguimiento de métricas y experimentos en **Weights & Biases**.
-*   **Model Registry:** Gestión de versiones mediante **WandB Artifacts**. La API descarga dinámicamente el mejor modelo (`candidate`) al iniciar.
-*   **Servicio de Inferencia:** Backend construido con **FastAPI** para ofrecer predicciones de baja latencia.
-*   **Contenerización:** Uso de **Docker** para asegurar que el servicio funcione de forma idéntica en cualquier entorno.
-*   **Despliegue (Production):** Alojado en **Render** con un endpoint público accesible para su consumo.
+Este proyecto implementa un ecosistema completo de **MLOps** para la clasificación de señales de electrocardiograma (ECG):
 
-## Validación y Calidad
-*   **Testing:** El proyecto incluye una suite de pruebas en el directorio `/tests` utilizando **Pytest** para verificar la integridad de la API y el modelo.
+| Componente | Tecnología | Descripción |
+|------------|------------|-------------|
+| **Entrenamiento** | PyTorch + WandB | Modelo InceptionTime con tracking |
+| **Model Registry** | WandB Artifacts | Versionado (`model:v2`) |
+| **API de Inferencia** | FastAPI | Servicio REST |
+| **Contenerización** | Docker | Entorno reproducible |
+| **Despliegue** | Render | Servicio cloud |
+| **Testing** | Pytest | Validación |
 
-*   **Trazabilidad:** Se utiliza el registro de WandB.
-
-## Instalación y Uso Local
-
-### 1. Clonar el repositorio
-```bash
-git clone [https://github.com/aadib-csic/ECG-MLOps-Project.git](https://github.com/aadib-csic/ECG-MLOps-Project.git)
-cd ECG-MLOps-Project
+---
 
 ## 🔗 Enlaces del Proyecto
 
+### Producción
+- **API Swagger UI:** https://ecg-mlops-project.onrender.com/docs  
+- **Health Check:** https://ecg-mlops-project.onrender.com/health_check  
+- **Endpoint de Predicción:** `POST https://ecg-mlops-project.onrender.com/predict`
 
-- **API en Producción (Swagger UI):**  
-  [Abrir Swagger](https://ecg-mlops-project.onrender.com/docs#/default/health_check__get)
+### 📊 Weights & Biases
+- **Reporte:**  
+  https://wandb.ai/ali-adib-csic/ECG-MLOps-Project/reports/Reporte-de-MLOps-Comparativa-InceptionTime-vs-ROCKET-y-Trazabilidad-de-Artefactos--VmlldzoxNjY4NTMwNA  
 
-- **Model Registry y Reporte (Weights & Biases):**  
-  [Ver reporte en W&B](https://wandb.ai/ali-adib-csic/ECG-MLOps-Project/reports/Reporte-de-MLOps-Comparativa-InceptionTime-vs-ROCKET-y-Trazabilidad-de-Artefactos--VmlldzoxNjY4NTMwNA)
+- **Model Registry:**  
+  https://wandb.ai/ali-adib-csic/ECG-MLOps-Project/artifacts  
 
-- **Repositorio GitHub:**  
-  [Ver código](https://github.com/aadib-csic/ECG-MLOps-Project.git)
+### 💻 Código
+- **GitHub:** https://github.com/aadib-csic/ECG-MLOps-Project
 
-## Instalación y Uso Local
-```bash
+---
 
-### 1. Clonar el repositorio
-```bash
-git clone https://github.com/aadib-csic/ECG-MLOps-Project.git
-cd ECG-MLOps-Project
+## 🚀 Uso en Producción
 
-# 2. Construir la imagen
-docker build -t ecg-mlops-service .
+El servicio ya está desplegado y listo para usar.
 
-# 3. Ejecutar contenedor
-docker run -p 8000:8000 ecg-mlops-service
+👉 **El usuario NO necesita configurar nada**.
+
+```text
+Solo tienes que enviar una petición al endpoint /predict
