@@ -13,13 +13,13 @@ from src.data_loader import ECGDataLoader
 from src.utils import preprocess_signal
 
 def train_rocket():
-    # Inicializamos wandb para el Baseline
+    # Inicializar wandb para el Baseline
     run = wandb.init(project="ECG-MLOps-Project", job_type="baseline")
     
     # Configuración fija para el Baseline
     config = {
         "num_kernels": 1000, # ROCKET usa kernels aleatorios
-        "target_samples": 500 # Usamos lo mismo que el sweep rápido para comparar
+        "target_samples": 500 # lo mismo que el sweep rápido para comparar
     }
     wandb.config.update(config)
 
@@ -32,7 +32,7 @@ def train_rocket():
     X_test, y_test = preprocess_signal(test_df)
 
     # ROCKET espera (n_instances, n_columns, n_timepoints)
-    # Nuestras señales ya tienen esa forma (N, 1, 187)
+    # señales ya tienen esa forma (N, 1, 187)
     
     print(f"🚀 Iniciando ROCKET con {config['num_kernels']} kernels...")
     
@@ -41,7 +41,7 @@ def train_rocket():
     rocket.fit(X_train)
     X_train_transform = rocket.transform(X_train)
     
-    # 3. Clasificador (Ridge es muy rápido)
+    # 3. Clasificador 
     classifier = RidgeClassifierCV(alphas=np.logspace(-3, 3, 10))
     classifier.fit(X_train_transform, y_train)
 

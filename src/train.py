@@ -44,7 +44,7 @@ def train_inception(config=None):
     test_y = torch.LongTensor(y_test)
     
     # Crear DataLoaders usando el método de fastai
-    # Necesitamos que los datos estén en formato TensorDataset
+    
     class CustomDataset:
         def __init__(self, x, y):
             self.x = x
@@ -77,7 +77,7 @@ def train_inception(config=None):
     if torch.cuda.is_available():
         model = model.cuda()
     
-    # Learner con WandbCallback nativo
+    # Learner con WandbCallback
     learn = Learner(
         dls, 
         model, 

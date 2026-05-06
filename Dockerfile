@@ -23,7 +23,7 @@ COPY ./api ./api
 COPY ./tests ./tests
 
 # Ejecutar tests durante el build
-#RUN pytest
+#RUN pytest  (ignorar no debe ser en Docker)
 
 # Exponemos el puerto 8000
 EXPOSE 8000

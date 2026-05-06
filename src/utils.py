@@ -4,7 +4,7 @@ from sklearn.utils import resample
 
 def preprocess_signal(df):
     """
-    Convierte el DataFrame en tensores de PyTorch con el formato (B, C, L)
+    Convierte el DataFrame en tensores de PyTorch
     """
     X = df.iloc[:, :-1].values
     y = df.iloc[:, -1].values
