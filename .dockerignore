@@ -10,9 +10,9 @@ artifacts/
 .env
 
 # Data & Models
-# Ignoramos todo el contenido de data y models, excepto los punteros DVC
+# Ignorar todo el contenido de data y models, excepto los punteros DVC
 data/*
-!data/*.dvc
+!data/*.dvc  #Aunque se ignora la carpeta data (para reducir archivos muy pesados), SÍ suba los archivos .dvc
 models/*
 !models/.gitkeep
 
