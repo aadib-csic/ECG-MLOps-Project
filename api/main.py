@@ -30,10 +30,10 @@ class ECGRequest(BaseModel):
 
 @app.on_event("startup")
 def load_candidate_model():
-    """Descarga el artefacto v2 de W&B y reconstruye el modelo usando API directa (sin sockets)."""
+    """Descarga el artefacto v2 de W&B y reconstruye el modelo usando API directa"""
     global model_engine
     try:
-        # Configuración para entorno cloud (desactiva comunicación por sockets)
+        # Configuración para entorno cloud (desactivar comunicación por sockets)
         os.environ["WANDB_MODE"] = "offline"
         os.environ["WANDB_SILENT"] = "true"
         
