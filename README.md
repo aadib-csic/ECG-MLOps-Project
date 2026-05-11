@@ -43,15 +43,6 @@ La infraestructura de este proyecto funciona con **Continuous Deployment (CD)**:
   2. Instalar todas las dependencias
   3. Levantar el servidor
 
-### Flujo de trabajo
-
-```mermaid
-graph LR
-    A[Git Push] --> B[Render Detecta Cambio]
-    B --> C[Docker Build]
-    C --> D[Instalar Dependencias]
-    D --> E[Iniciar Servidor]
-    E --> F[API Disponible]
 ---
 
 ## 🔗 Enlaces del Proyecto
