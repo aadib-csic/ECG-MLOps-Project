@@ -13,7 +13,7 @@
 
 | Estado | Descripción |
 |--------|-------------|
-| ✅ **API Desplegada** | Servicio activo en Render |
+| ✅ **API Desplegada** | Servicio activo en Render (nube) |
 | 🚀 **Listo para Producción** | Endpoint funcional para usuarios |
 
 ---
@@ -31,6 +31,27 @@ Este proyecto implementa un ecosistema completo de **MLOps** para la clasificaci
 | **Despliegue** | Render | Servicio cloud |
 | **Testing** | Pytest | Validación |
 
+---
+## 🔄 Despliegue 
+
+La infraestructura de este proyecto funciona con **Continuous Deployment (CD)**:
+
+- **🔗 Fuente:** El código reside en este repositorio de GitHub.
+- **⚙️ Orquestación:** Render está conectado directamente a este repositorio. Ante cualquier cambio en la rama principal, Render detecta la actualización automáticamente y lanza un nuevo despliegue.
+- **🐳 Contenedorización:** Render utiliza el archivo `Dockerfile` desde la raíz del código para:
+  1. Construir una imagen del entorno
+  2. Instalar todas las dependencias
+  3. Levantar el servidor
+
+### Flujo de trabajo
+
+```mermaid
+graph LR
+    A[Git Push] --> B[Render Detecta Cambio]
+    B --> C[Docker Build]
+    C --> D[Instalar Dependencias]
+    D --> E[Iniciar Servidor]
+    E --> F[API Disponible]
 ---
 
 ## 🔗 Enlaces del Proyecto
